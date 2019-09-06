@@ -16,7 +16,13 @@ const services = require('./services');
 const appHooks = require('./app.hooks');
 const channels = require('./channels');
 
+const initDB = require('./config/db');
+const routes = require('./config/routes');
+
 const app = express(feathers());
+
+// Create DB connection
+initDB();
 
 // Load app configuration
 app.configure(configuration());
@@ -27,8 +33,12 @@ app.use(compress());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
+
 // Host the public folder
-app.use('/', express.static(app.get('public')));
+// app.use('/', express.static(app.get('public')));
+
+// Load routes
+app.use('/', routes);
 
 // Set up Plugins and providers
 app.configure(express.rest());
