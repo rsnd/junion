@@ -22,6 +22,8 @@ const sequelize = require('./sequelize');
 
 const app = express(feathers());
 
+require('dotenv').config();
+
 // Load app configuration
 app.configure(configuration());
 // Enable security, CORS, compression, favicon and body parsing
