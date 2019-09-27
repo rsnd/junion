@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": { "*": ["types/*"] },
+      "baseUrl": ".",
+      "paths": { "*": ["types/*"] },
+        "experimentalDecorators": true,
+        "allowJs": true
+    }
+}

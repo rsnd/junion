@@ -1,0 +1,57 @@
+{
+    "env": {
+        "node": true,
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "jest": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "airbnb"
+    ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true,
+            "legacyDecorators": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "indent": 0,
+        "no-tabs": 0,
+        "react/prop-types": 0,
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "arrow-parens": ["error", "as-needed"],
+        "no-param-reassign": 0,
+        "no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
+        "no-underscore-dangle": ["error", { "allow": [
+            "_id",
+            "_bootstrapAsync",
+            "_loadResourcesAsync",
+            "_loadResourcesAsync",
+            "_handleFinishLoading"
+        ] }],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "global-require": 0,
+        "react/destructuring-assignment": 0,
+        "brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
+        "prefer-destructuring": ["error", {"object": true, "array": false}]
+    }
+}

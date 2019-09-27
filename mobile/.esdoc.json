@@ -1,0 +1,30 @@
+{
+  "source": "./source",
+  "destination": "./documentation",
+  "plugins": [
+    {
+      "name": "esdoc-ecmascript-proposal-plugin",
+      "option": {"all": true}
+    },
+    {
+      "name": "esdoc-jsx-plugin",
+      "option": {"enable": true}
+    },
+    {
+      "name": "esdoc-standard-plugin",
+      "option": {
+        "test": {
+          "source": "./tests/",
+          "interfaces": ["describe", "it", "context", "suite", "test"],
+          "includes": ["\\.js$"]
+        }
+      }
+    },
+    {
+      "name": "esdoc-publish-html-plugin",
+      "option": {
+        "template": "./node_modules/esdoc-custom-theme/template"
+      }
+    }
+  ]
+}
