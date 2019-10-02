@@ -1,6 +1,12 @@
 import { StyleSheet } from 'react-native';
 import placeholders from '../base/placeholders';
 
+const iconFunc = dimension => ({
+  resizeMode: 'contain',
+  height: dimension,
+  width: dimension,
+});
+
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -20,7 +26,6 @@ export default StyleSheet.create({
   inputBoxContainer: {
     backgroundColor: placeholders.lightGray,
     paddingHorizontal: 10,
-    marginVertical: 15,
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
   },
@@ -30,20 +35,20 @@ export default StyleSheet.create({
     borderBottomWidth: 1,
   },
   button: {
-    marginVertical: 15,
     backgroundColor: placeholders.blue,
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  right: {
-    resizeMode: 'contain',
-    height: 20,
-    width: 20,
+  icon: {
+    ...iconFunc(20),
   },
-  inputRow: {
-    paddingBottom: 30,
+  buttonIcon: {
+    ...iconFunc(25),
+  },
+  sectionDivider: {
+    paddingBottom: 20,
     borderBottomColor: '#C8C8C8',
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
