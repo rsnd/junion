@@ -4,6 +4,9 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../common/TabBarIcon';
 import HomeScreen from '../home/HomeScreen';
+import LoginScreen from '../auth/LoginScreen';
+import SignupScreen from '../auth/SignupScreen';
+import AnonymousScreen from '../auth/AnonymousScreen';
 import SettingsScreen from '../settings/SettingsScreen';
 
 const config = Platform.select({
@@ -14,6 +17,12 @@ const config = Platform.select({
 const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
+    Login: LoginScreen,
+    Signup: SignupScreen,
+    AnonymousAccess: AnonymousScreen,
+  },
+  {
+    initialRouteName: 'Home',
   },
   config,
 );

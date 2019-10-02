@@ -2,17 +2,23 @@ import { StyleSheet } from 'react-native';
 import placeholders from './placeholders';
 
 export default StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    paddingHorizontal: 15,
+  },
   fullSize: {
     width: '100%',
     height: '100%',
   },
   fullButton: {
-    backgroundColor: placeholders.orange,
-    width: '100%',
-    paddingVertical: 15,
+    backgroundColor: placeholders.blue,
+    paddingHorizontal: 15,
+    alignItems:'center',
+    paddingVertical: 10,
     borderWidth: 1,
     borderColor: 'transparent',
-    borderRadius: 5,
+    borderRadius: 10,
   },
   fullStrokeButton: {
     backgroundColor: 'white',
