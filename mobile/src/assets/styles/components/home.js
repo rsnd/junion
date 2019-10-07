@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import placeholders from '../base/placeholders';
 
 const iconFunc = dimension => ({
@@ -12,7 +12,7 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     paddingHorizontal: 15,
-    marginTop: 50,
+    marginTop: Platform.OS === 'ios' ? 10 : 40,
   },
   headingText: {
     color: placeholders.almostBlack,
@@ -21,7 +21,7 @@ export default StyleSheet.create({
   },
   text: {
     color: placeholders.darkGray,
-    fontSize: 16,
+    fontSize: 14,
   },
   inputBoxContainer: {
     backgroundColor: placeholders.lightGray,

@@ -7,7 +7,10 @@ import HomeScreen from '../home/HomeScreen';
 import LoginScreen from '../auth/LoginScreen';
 import SignupScreen from '../auth/SignupScreen';
 import AnonymousScreen from '../auth/AnonymousScreen';
-import SettingsScreen from '../settings/SettingsScreen';
+import SettinsNavigator from '../settings/SettinsNavigator';
+import EventNavigator from '../event/EventNavigator';
+import EventConversationScreen from '../event/EventConversationScreen';
+import EventPollScreen from '../event/EventPollScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -20,6 +23,14 @@ const HomeStack = createStackNavigator(
     Login: LoginScreen,
     Signup: SignupScreen,
     AnonymousAccess: AnonymousScreen,
+    EventNavigator: {
+      screen: EventNavigator,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    Responses: EventConversationScreen,
+    Poll: EventPollScreen,
   },
   {
     initialRouteName: 'Home',
@@ -45,7 +56,12 @@ HomeStack.path = '';
 
 const SettingsStack = createStackNavigator(
   {
-    Settings: SettingsScreen,
+    Settings: {
+      screen: SettinsNavigator,
+      navigationOptions: {
+        header: null,
+      },
+    },
   },
   config,
 );
@@ -67,7 +83,10 @@ const tabNavigator = createBottomTabNavigator(
     HomeStack,
     SettingsStack,
   },
-  { tabBarOptions: { showLabel: false } },
+  {
+    tabBarOptions: { showLabel: false },
+    initialRouteName: 'HomeStack',
+  },
 );
 
 tabNavigator.path = '';

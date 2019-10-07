@@ -6,18 +6,28 @@ import { Text } from 'react-native';
  * @type {Component}
  */
 
-const SourceSansProText = props => (
-  <Text
-    style={[
-      props.style,
-      {
-        fontFamily: props.family || 'SourceSansPro',
-        fontSize: props.size || props.style.fontSize,
-      },
-    ]}
-  >
-    {props.text}
-  </Text>
-);
+ const mergeStyles = ({ style: styles }) => {
+   const newStyles = Array.isArray(styles)
+   ? Object.assign({}, ...styles)
+   : styles;
+   return newStyles;
+ };
+
+const SourceSansProText = props => {
+  const styles = mergeStyles(props);
+  return (
+    <Text
+      style={[
+        styles,
+        {
+          fontFamily: props.family || 'SourceSansPro',
+          fontSize: props.size || styles.fontSize,
+        },
+      ]}
+    >
+      {props.text}
+    </Text>
+  );
+};
 
 export default SourceSansProText;

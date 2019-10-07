@@ -16,6 +16,10 @@ import globalStyles from '../../assets/styles/base/global';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class LoginScreen extends Component {
+  static navigationOptions = () => ({
+    headerTitle: 'Login',
+  });
+
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
@@ -143,15 +147,10 @@ class LoginScreen extends Component {
               text="Forgotten Password ?"
             />
           </TouchableOpacity>
-
         </ScrollView>
       </SafeAreaView>
     );
   }
 }
-
-LoginScreen.navigationOptions = {
-  headerTitle: 'Login',
-};
 
 export default LoginScreen;

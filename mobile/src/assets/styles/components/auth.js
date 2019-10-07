@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import placeholders from '../base/placeholders';
 
 export default StyleSheet.create({
   linkButton: {

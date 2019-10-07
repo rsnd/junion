@@ -14,7 +14,7 @@ export default StyleSheet.create({
   fullButton: {
     backgroundColor: placeholders.blue,
     paddingHorizontal: 15,
-    alignItems:'center',
+    alignItems: 'center',
     paddingVertical: 10,
     borderWidth: 1,
     borderColor: 'transparent',
@@ -96,6 +96,9 @@ export default StyleSheet.create({
   },
   p_t_sm: {
     paddingTop: 10,
+  },
+  p_t_md: {
+    paddingTop: 20,
   },
   p_r_xs: {
     paddingRight: 5,

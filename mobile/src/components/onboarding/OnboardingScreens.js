@@ -53,7 +53,7 @@ const bottomActions = (navigation, activeDot, color) => (
 class OnboardingScreens extends Component {
   constructor(props) {
     super(props);
-    // this.bootstrapAsync();
+    this.bootstrapAsync();
   }
 
   componentDidMount() {

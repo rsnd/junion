@@ -20,8 +20,8 @@ class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      passcodeCollapse: true,
-      authCollapse: true,
+      passcodeCollapse: false,
+      authCollapse: false,
     };
   }
 
@@ -96,7 +96,7 @@ class HomeScreen extends Component {
               </View>
               <TouchableOpacity
                 style={[globalStyles.col_2, homeStyles.button]}
-                onPress={() => this.onCollapse({ authCollapse: !this.state.authCollapse })}
+                onPress={() => this.props.navigation.navigate('EventNavigator')}
               >
                 <Image
                   source={require('../../assets/images/icons/right_white.png')}
@@ -116,7 +116,6 @@ class HomeScreen extends Component {
                 text="Account Details"
               />
               <SourceSansProText
-                size={16}
                 style={[homeStyles.text, globalStyles.m_t_sm, globalStyles.m_b_md]}
                 text="You can login, sign up or join an event anonymously."
               />
