@@ -1,7 +1,9 @@
 /* eslint-disable import/prefer-default-export */
 
-const API_KEY = '';
+const ENVIRONMENT = '';
+const LOCAL_API_URL = '';
 
 export {
-  API_KEY,
+  ENVIRONMENT,
+  LOCAL_API_URL,
 };

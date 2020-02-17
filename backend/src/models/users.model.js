@@ -1,63 +1,23 @@
-// See http://docs.sequelizejs.com/en/latest/docs/models-definition/
+// users-model.js - A mongoose model
+//
+// See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
-const Sequelize = require('sequelize');
-const DataTypes = Sequelize.DataTypes;
-
 module.exports = function (app) {
-  const sequelizeClient = app.get('sequelizeClient');
-  const users = sequelizeClient.define('users', {
-    _id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    user_code: {
-      type: DataTypes.STRING,
-      unique: true,
-      allowNull: false,
-    },
-    user_alias: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    user_role: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    avatar: {
-      type: DataTypes.STRING,
-    },
-    googleId: {
-      type: Sequelize.STRING
-    },
-    facebookId: {
-      type: Sequelize.STRING
-    },
-    twitterId: {
-      type: Sequelize.STRING
-    },
+  const mongooseClient = app.get('mongooseClient');
+  const users = new mongooseClient.Schema({
+    email: { type: String, unique: true, lowercase: true, required: true },
+    password: { type: String, required: true },
+    userCode: { type: String, required: true },
+    userAlias: { type: String, required: true },
+    userRole: { type: String, required: true },
+    avatar: { type: String, required: true },
+    auth0Id: { type: String },
+    googleId: { type: String },
+    facebookId: { type: String },
+    twitterId: { type: String },
   }, {
-    hooks: {
-      beforeCount(options) {
-        options.raw = true;
-      }
-    }
+    timestamps: true
   });
 
-  // eslint-disable-next-line no-unused-vars
-  users.associate = function (models) {
-    // Define associations here
-    // See http://docs.sequelizejs.com/en/latest/docs/associations/
-  };
-
-  return users;
+  return mongooseClient.model('users', users);
 };

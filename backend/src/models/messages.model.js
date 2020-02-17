@@ -1,49 +1,33 @@
-// See http://docs.sequelizejs.com/en/latest/docs/models-definition/
+// messages-model.js - A mongoose model
+// 
+// See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
-const Sequelize = require('sequelize');
-const DataTypes = Sequelize.DataTypes;
-
 module.exports = function (app) {
-  const sequelizeClient = app.get('sequelizeClient');
-  const messages = sequelizeClient.define('messages', {
-    _id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    message: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    annonymous: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false
-    },
-    upvotes: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    downvotes: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    replies: {
-      type: DataTypes.JSONB,
-      allowNull: false
-    },
-  }, {
-    hooks: {
-      beforeCount(options) {
-        options.raw = true;
+  const mongooseClient = app.get('mongooseClient');
+  const { Schema } = mongooseClient;
+  const messages = new Schema({
+    createdBy: { type: Schema.Types.ObjectId, required: true },
+    eventId: { type: Schema.Types.ObjectId, required: true },
+    message: { type: String, required: true },
+    annonymous: { type: Boolean, required: true },
+    upvotes: { type: Number, required: true },
+    downvotes: { type: Number, required: true },
+    replies: [
+      {
+        createdAt: { type: Date, default: Date.now },
+        createdBy: { type: Schema.Types.ObjectId, required: true },
+        text: { type: String, required: true },
       }
-    }
+    ],
+  }, {
+    timestamps: true
   });
 
-  // eslint-disable-next-line no-unused-vars
-  messages.associate = function (models) {
-    models.messages.belongsTo(models.users);
-    models.messages.belongsTo(models.events);
-  };
-
-  return messages;
+  // This is necessary to avoid model compilation errors in watch mode
+  // see https://github.com/Automattic/mongoose/issues/1251
+  try {
+    return mongooseClient.model('messages');
+  } catch (e) {
+    return mongooseClient.model('messages', messages);
+  }
 };

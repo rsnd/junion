@@ -139,10 +139,12 @@ class SignupScreen extends Component {
             />
           </View>
               
-          <TouchableOpacity style={[
+          <TouchableOpacity
+            style={[
               globalStyles.fullButton,
               globalStyles.m_b_sm,
             ]}
+            onPress={() => this.props.navigation.navigate('Login')}
           >
             <View style={globalStyles.row}>
               <View style={globalStyles.col_1}>

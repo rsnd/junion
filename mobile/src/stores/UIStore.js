@@ -2,14 +2,17 @@ import { observable, action } from 'mobx';
 import { setClassProps } from '../utils/helpers';
 
 export default class UIStore {
-  @observable settingsEventsRoute = 'SettingsEventConversationsScreen';
+	@observable
+	settingsEventsRoute = 'SettingsEventConversationsScreen';
 
-	@observable modal = {
+	@observable
+	modal = {
 		open: false,
 		type: '',
   };
 
-	@observable activeTabs = {
+	@observable
+	activeTabs = {
 		auth: 'signin',
 		serviceType: 'Airport Pickup',
   };

@@ -9,7 +9,7 @@ const feathers = require('@feathersjs/feathers');
 const configuration = require('@feathersjs/configuration');
 const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
-
+require('dotenv').config();
 
 const middleware = require('./middleware');
 const services = require('./services');
@@ -18,11 +18,9 @@ const channels = require('./channels');
 
 const authentication = require('./authentication');
 
-const sequelize = require('./sequelize');
+const mongoose = require('./mongoose');
 
 const app = express(feathers());
-
-require('dotenv').config();
 
 // Load app configuration
 app.configure(configuration());
@@ -40,7 +38,7 @@ app.use('/', express.static(app.get('public')));
 app.configure(express.rest());
 app.configure(socketio());
 
-app.configure(sequelize);
+app.configure(mongoose);
 
 // Configure other middleware (see `middleware/index.js`)
 app.configure(middleware);

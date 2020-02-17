@@ -1,37 +1,28 @@
-// See http://docs.sequelizejs.com/en/latest/docs/models-definition/
+// polls-model.js - A mongoose model
+// 
+// See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
-const Sequelize = require('sequelize');
-const DataTypes = Sequelize.DataTypes;
-
 module.exports = function (app) {
-  const sequelizeClient = app.get('sequelizeClient');
-  const polls = sequelizeClient.define('polls', {
-    _id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    poll_question: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    options: {
-      type: DataTypes.JSONB,
-      allowNull: false
-    },
+  const mongooseClient = app.get('mongooseClient');
+  const { Schema } = mongooseClient;
+  const polls = new Schema({
+    question: { type: String, required: true },
+    createdBy: { type: Schema.Types.ObjectId, required: true },
+    eventId: { type: Schema.Types.ObjectId, required: true },
+    options: [
+      { yes: { type: String, required: true } },
+      { no: { type: String, required: true } },
+      { maybe: { type: String, required: true } },
+    ],
   }, {
-    hooks: {
-      beforeCount(options) {
-        options.raw = true;
-      }
-    }
+    timestamps: true
   });
 
-  // eslint-disable-next-line no-unused-vars
-  polls.associate = function (models) {
-    models.polls.belongsTo(models.users);
-    models.polls.belongsTo(models.events);
-  };
-
-  return polls;
+  // This is necessary to avoid model compilation errors in watch mode
+  // see https://github.com/Automattic/mongoose/issues/1251
+  try {
+    return mongooseClient.model('polls');
+  } catch (e) {
+    return mongooseClient.model('polls', polls);
+  }
 };

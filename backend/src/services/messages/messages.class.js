@@ -1,4 +1,4 @@
-const { Service } = require('feathers-sequelize');
+const { Service } = require('feathers-mongoose');
 
 exports.Messages = class Messages extends Service {
   

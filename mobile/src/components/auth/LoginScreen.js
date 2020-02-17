@@ -7,14 +7,17 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
+import { inject, observer } from 'mobx-react';
 
+import { renderIf } from '../../utils/helpers';
 import SourceSansProText from '../common/StyledText';
 import homeStyles from '../../assets/styles/components/home';
 import authStyles from '../../assets/styles/components/auth';
 import placeholders from '../../assets/styles/base/placeholders';
 import globalStyles from '../../assets/styles/base/global';
 
-// eslint-disable-next-line react/prefer-stateless-function
+@inject('authStore')
+@observer
 class LoginScreen extends Component {
   static navigationOptions = () => ({
     headerTitle: 'Login',
@@ -86,7 +89,15 @@ class LoginScreen extends Component {
             style={homeStyles.smallText}
             text="Or"
           />
-
+          {renderIf(
+            this.props.authStore.errors.visible
+            && this.props.authStore.errors.type === 'loginError',
+            <SourceSansProText
+              size={14}
+              style={[globalStyles.m_b_sm, { color: placeholders.red }]}
+              text={`Sorry, an error occured, ${this.props.authStore.errors.message.toLowerCase()}.`}
+            />,
+          )}
           <View style={[
               globalStyles.m_b_sm,
               homeStyles.inputBoxContainer,
@@ -95,7 +106,15 @@ class LoginScreen extends Component {
           >
             <TextInput
               style={homeStyles.inputBox}
-              value="Email address."
+              value={this.props.authStore.loginCredentials.email}
+              onChangeText={text => {
+                this.props.authStore.setClassProps([
+                  {
+                    name: 'email',
+                    value: text,
+                  },
+                ], this.props.authStore.loginCredentials);
+              }}
             />
           </View>
           <View style={[
@@ -106,7 +125,15 @@ class LoginScreen extends Component {
           >
             <TextInput
               style={homeStyles.inputBox}
-              value="Password"
+              value={this.props.authStore.loginCredentials.password}
+              onChangeText={text => {
+                this.props.authStore.setClassProps([
+                  {
+                    name: 'password',
+                    value: text,
+                  },
+                ], this.props.authStore.loginCredentials);
+              }}
             />
           </View>
 
@@ -116,7 +143,8 @@ class LoginScreen extends Component {
               globalStyles.m_b_sm,
               { backgroundColor: placeholders.green },
             ]}
-            onPress={() => this.props.navigation.navigate('Login')}
+            onPress={() => this.props.navigation.navigate('EventNavigator')}
+            // onPress={() => this.props.authStore.login()}
           >
             <View style={globalStyles.row}>
               <View style={globalStyles.col_1}>

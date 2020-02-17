@@ -33,7 +33,7 @@ const HomeStack = createStackNavigator(
     Poll: EventPollScreen,
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Signup',
   },
   config,
 );

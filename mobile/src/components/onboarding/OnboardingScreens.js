@@ -67,7 +67,7 @@ class OnboardingScreens extends Component {
   bootstrapAsync = async () => {
     const onboardingComplete = await AsyncStorage.getItem('onboardingComplete');
     if (onboardingComplete === 'true') {
-      this.props.navigation.navigate('Main');
+      // this.props.navigation.navigate('Main');
     }
     else {
       await AsyncStorage.setItem('onboardingComplete', 'false');
